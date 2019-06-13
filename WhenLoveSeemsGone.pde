@@ -1,26 +1,15 @@
-//import com.hamoid.*;
-//VideoExport videoExport;
-
-void keyPressed() {
-  save("video/when-love-seems-gone-"+System.currentTimeMillis()+".png");
-
-  if (key == 'q') {
-    //videoExport.endMovie();
-    exit();
-  }
-}
+import com.hamoid.*;
+VideoExport videoExport;
 
 String letters;
 PFont cousine;
-
 float fontsize = 17;
 float angle = 0;
 
 void setup() {
   size(1280, 720, P3D);
-  //videoExport = new VideoExport(this);
-  //videoExport.startMovie();
-
+  videoExport = new VideoExport(this);
+  videoExport.startMovie();
   letters = "    M.A.R.S {     When Love Seems Gone () More..Share  |  wh.n.l..e.seems:g0n' ,. (#sound of broken heart) ::://m-a-r-s-music/when-love-seems-gone:            >>> 10_when_love_seems_gone.mp3  } ";
   cousine = createFont("data/Cousine/Cousine-Regular.ttf", fontsize);
   textFont(cousine);
@@ -29,6 +18,7 @@ void setup() {
 void draw() {
   background(255);
   fill(0, 100);
+  
   float n = map(frameCount, 0, 30000, 0, 1);
   float z = 0.0f;
   float u = width/2 - 50;
@@ -37,6 +27,7 @@ void draw() {
   float i = 0.0f;
   float r = 80;
   int l = 0;
+  
   translate(width/2, height/2);
   rotateY(angle);
   for (float y = -v; y < v; y+=c) {
@@ -52,5 +43,13 @@ void draw() {
     }
   }
   angle += 0.001;
-  //videoExport.saveFrame();
+  videoExport.saveFrame();
+}
+
+void keyPressed() {
+  // save("video/when-love-seems-gone-"+System.currentTimeMillis()+".png");
+  if (key == 'q') {
+    videoExport.endMovie();
+    exit();
+  }
 }
